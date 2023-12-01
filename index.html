@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Weather App | Syed Arham Haider</title>
 </head>
 
 <body>
@@ -15,7 +16,9 @@
             <button><img src="images/search.png"></button>
         </div>
         <div class="error">
-            <p>Invalid city name</p>
+            <p>
+                <span class="fa fa-exclamation-triangle"></span> Invalid city name
+            </p>
         </div>
         <div class="weather">
             <img src="images/rain.png" class="weather-icon">
@@ -49,10 +52,13 @@
         const weatherIcon = document.querySelector(".weather-icon");
 
         async function checkWeather(city) {
+
+            document.querySelector(".error").style.display = "none";
+            document.querySelector(".weather").style.display = "none";
+
             const response = await fetch(apiUrl + city + `&appid=${apikey}`);
 
             if (response.status == 404) {
-                document.querySelector(".error").style.display = "block";
                 document.querySelector(".error").style.display = "block";
             } else {
                 var data = await response.json();
@@ -80,7 +86,6 @@
                 }
 
                 document.querySelector(".weather").style.display = "block";
-                document.querySelector(".weather").style.display = "none";
             }
         }
 
